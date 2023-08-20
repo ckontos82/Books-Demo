@@ -13,3 +13,4 @@ This version does not utilize persistence. The assignment of the Service to the 
 ## Screenshots
 ![Welcome Screen](images/image1.png)
 ![Main App](images/image2.png)
+![Exception - Empty field](images/image3.png)
