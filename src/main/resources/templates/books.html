@@ -18,11 +18,18 @@
         <th>BOOK NAME</th>
         <th>AUTHOR</th>
         <th>PRICE</th>
+        <th></th>
     </tr>
     <tr th:each="b: ${books}" >
         <td th:text="${b.title}"></td>
         <td th:text="${b.author}"></td>
         <td th:text="${b.price}"></td>
+        <td>
+            <form action="/books/delete" method="post">
+                <input type="hidden" name="bookId" th:value="${b.id}"/>
+                <button type="submit">Delete</button>
+            </form>
+        </td>
     </tr>
 </table>
 <h2>Add a book</h2>

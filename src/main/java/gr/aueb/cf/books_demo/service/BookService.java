@@ -17,4 +17,8 @@ public class BookService implements IBookService {
     public List<Book> findAll() {
         return bookList;
     }
+
+    public void deleteBook(String bookId) {
+        bookList.removeIf(book -> book.getId().equals(bookId));
+    }
 }
