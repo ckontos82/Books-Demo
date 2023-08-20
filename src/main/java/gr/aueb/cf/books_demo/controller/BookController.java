@@ -1,5 +1,6 @@
 package gr.aueb.cf.books_demo.controller;
 
+import gr.aueb.cf.books_demo.controller.exceptions.IllegalFieldException;
 import gr.aueb.cf.books_demo.model.Book;
 import gr.aueb.cf.books_demo.service.IBookService;
 import org.springframework.stereotype.Controller;
@@ -25,12 +26,15 @@ public class BookController {
     }
 
     @RequestMapping(value = "/books", method = RequestMethod.POST)
-public String addBook(
-        @RequestParam String title,
-        @RequestParam String author,
-        @RequestParam double price,
-        Model model
+    public String addBook(
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) String author,
+            @RequestParam(required = false) Double price,
+            Model model
     ) {
+        if (title == null || title.isEmpty() || author == null || author.isEmpty() || price == null || price <= 0   ) {
+            throw new IllegalFieldException("Title and Author fields cannot be empty, and Price must be greater than 0!");
+        }
         Book b = new Book();
         b.setTitle(title);
         b.setAuthor(author);
@@ -38,10 +42,9 @@ public String addBook(
 
         bookService.addBook(b);
 
-        var books =bookService.findAll();
+        var books = bookService.findAll();
         model.addAttribute("books", books);
 
         return "books.html";
     }
-
 }
