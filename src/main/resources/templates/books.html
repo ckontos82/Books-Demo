@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main BooksApp Page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/books.css}">
+</head>
+<body>
+<h1>Books</h1>
+<h2>View books</h2>
+<table>
+    <tr>
+        <th>BOOK NAME</th>
+        <th>AUTHOR</th>
+        <th>PRICE</th>
+    </tr>
+    <tr th:each="b: ${books}" >
+        <td th:text="${b.title}"></td>
+        <td th:text="${b.author}"></td>
+        <td th:text="${b.price}"></td>
+    </tr>
+</table>
+<h2>Add a book</h2>
+<div class="form-container">
+    <form action="/books" method="post">
+        <label class="item1" for="title">Title:</label>
+        <input class="item2" type="text" name="title" id="title">
+        <label class="item3" for="author">Author:</label>
+        <input class="item4" type="text" name="author" id="author">
+        <label class="item5" for="price">Price:</label>
+        <input class="item6" type="number" step="any" name="price" id="price">
+        <button type="submit">Add book</button>
+    </form>
+</div>
+</body>
+</html>
